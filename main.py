@@ -37,7 +37,6 @@ nowDateStr = nowDate.strftime('%Y/%m/%d %H:%M:%S %Z')
 
 REQUIRED_ENV_VARS = [
     "BOT_NAME",
-    "SYSTEM_PROMPT",
     "GPT_MODEL",
     "MAX_DAILY_USAGE",
     "GROUP_MAX_DAILY_USAGE",
@@ -58,7 +57,6 @@ REQUIRED_ENV_VARS = [
 
 DEFAULT_ENV_VARS = {
     'BOT_NAME': '秘書,secretary,秘书,เลขานุการ,sekretaris',
-    'SYSTEM_PROMPT': 'あなたは有能な秘書です。',
     'GPT_MODEL': 'gpt-4o-mini',
     'MAX_TOKEN_NUM': '2000',
     'MAX_DAILY_USAGE': '1000',
@@ -84,7 +82,7 @@ except Exception as e:
     raise
 
 def reload_settings():
-    global BOT_NAME, SYSTEM_PROMPT, GPT_MODEL
+    global BOT_NAME, GPT_MODEL
     global MAX_TOKEN_NUM, MAX_DAILY_USAGE, GROUP_MAX_DAILY_USAGE, FREE_LIMIT_DAY, MAX_DAILY_MESSAGE
     global NG_MESSAGE, NG_KEYWORDS
     global STICKER_MESSAGE, STICKER_FAIL_MESSAGE
@@ -97,7 +95,6 @@ def reload_settings():
         BOT_NAME = BOT_NAME.split(',')
     else:
         BOT_NAME = []
-    SYSTEM_PROMPT = get_setting('SYSTEM_PROMPT') 
     GPT_MODEL = get_setting('GPT_MODEL')
     MAX_TOKEN_NUM = int(get_setting('MAX_TOKEN_NUM') or 2000)
     MAX_DAILY_USAGE = int(get_setting('MAX_DAILY_USAGE') or 0)
@@ -242,9 +239,6 @@ def settings():
     required_env_vars=REQUIRED_ENV_VARS
     )
 
-def systemRole():
-    return { "role": "system", "content": SYSTEM_PROMPT }
-
 def get_encrypted_message(message, hashed_secret_key):
     cipher = AES.new(hashed_secret_key, AES.MODE_ECB)
     message = message.encode('utf-8')
@@ -384,12 +378,12 @@ def handle_message(event):
                     return 'OK'
 
             temp_messages = nowDateStr + " " + head_message + "\n" + display_name + ":" + user_message
-            total_chars = len(encoding.encode(SYSTEM_PROMPT)) + len(encoding.encode(temp_messages)) + sum([len(encoding.encode(msg['content'])) for msg in user['messages']])
+            total_chars = len(encoding.encode(temp_messages)) + sum([len(encoding.encode(msg['content'])) for msg in user['messages']])
             while total_chars > MAX_TOKEN_NUM and len(user['messages']) > 0:
                 user['messages'].pop(0)
-                total_chars = len(encoding.encode(SYSTEM_PROMPT)) + len(encoding.encode(temp_messages)) + sum([len(encoding.encode(msg['content'])) for msg in user['messages']])
+                total_chars = len(encoding.encode(temp_messages)) + sum([len(encoding.encode(msg['content'])) for msg in user['messages']])
 
-            temp_messages_final = [systemRole()] + user['messages'].copy()
+            temp_messages_final = user['messages'].copy()
             temp_messages_final.append({'role': 'user', 'content': temp_messages}) 
 
             messages = user['messages']
