@@ -1,6 +1,6 @@
-# LineBotForGPTCore
+# LineBotForGPTCore(Only for o1-Preview)
 
-このリポジトリは、LINE上で動作するPythonベースのチャットボットです。このボットはChatGPT APIを使用して、ユーザからのメッセージに対してレスポンスを生成します。
+このリポジトリは、LINE上で動作するo1-Preview向けのPythonベースのチャットボットです。このボットはChatGPT APIを使用して、ユーザからのメッセージに対してレスポンスを生成します。
 
 ## 機能
 以下の機能を持っています。：
