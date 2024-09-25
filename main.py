@@ -57,7 +57,7 @@ REQUIRED_ENV_VARS = [
 
 DEFAULT_ENV_VARS = {
     'BOT_NAME': '秘書,secretary,秘书,เลขานุการ,sekretaris',
-    'GPT_MODEL': 'o1-mini',
+    'GPT_MODEL': 'gpt-4o-mini-2024-07-18',
     'MAX_TOKEN_NUM': '2000',
     'MAX_DAILY_USAGE': '1000',
     'GROUP_MAX_DAILY_USAGE': '1000',
