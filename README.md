@@ -1,6 +1,7 @@
 # LineBotForGPTCore(Only for o1-Preview)
 
 このリポジトリは、LINE上で動作するo1-Preview向けのPythonベースのチャットボットです。このボットはChatGPT APIを使用して、ユーザからのメッセージに対してレスポンスを生成します。
+o1-Previewはキャラクター設定を行うためのシステムプロンプトの設定が行えないため素の回答が返ってきます。
 
 ## 機能
 以下の機能を持っています。：
