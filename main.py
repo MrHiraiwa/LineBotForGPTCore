@@ -435,9 +435,9 @@ def run_conversation(reply_token, messages):
             model=GPT_MODEL,
             messages=messages,
         )
-    if DEBUG == 'True':
-        print(f"Debug: response={response}")
-        return response
+        if DEBUG == 'True':
+            print(f"Debug: response={response}")
+            return response
     except Exception as e:
         print(f"Error: {e}")
         line_reply(reply_token, ERROR_MESSAGE + f": {e}", 'text')
