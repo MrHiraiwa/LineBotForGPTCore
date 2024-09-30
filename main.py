@@ -427,11 +427,16 @@ def handle_message(event):
         return 'OK'
 
 def run_conversation(reply_token, messages):
+    if DEBUG == 'True':
+        print(f"Debug: reply_token={reply_token},messages={messages}")
+
     try:
         response = client.chat.completions.create(
             model=GPT_MODEL,
             messages=messages,
         )
+    if DEBUG == 'True':
+        print(f"Debug: response={response}")
         return response
     except Exception as e:
         print(f"Error: {e}")
