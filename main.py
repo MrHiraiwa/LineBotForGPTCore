@@ -303,7 +303,7 @@ def handle_message(event):
             exec_functions = False
             quick_reply_item = []
             head_message = ""
-            encoding: Encoding = tiktoken.encoding_for_model(GPT_MODEL)
+            encoding: Encoding = tiktoken.encoding_for_model("gpt-4o")
             messages = []
             updated_date_string = nowDate
             daily_usage = 0
