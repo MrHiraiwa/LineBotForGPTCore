@@ -428,7 +428,7 @@ def handle_message(event):
 
 def run_conversation(reply_token, messages):
     if DEBUG == 'True':
-        print(f"Debug: reply_token={reply_token},messages={messages}")
+        print(f"Debug: GPT_MODEL={GPT_MODEL},reply_token={reply_token},messages={messages}")
 
     try:
         response = client.chat.completions.create(
@@ -437,7 +437,7 @@ def run_conversation(reply_token, messages):
         )
         if DEBUG == 'True':
             print(f"Debug: response={response}")
-            return response
+        return response
     except Exception as e:
         print(f"Error: {e}")
         line_reply(reply_token, ERROR_MESSAGE + f": {e}", 'text')
